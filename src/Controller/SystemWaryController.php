@@ -23,7 +23,7 @@ class SystemWaryController extends AbstractController
         ]);
     }
        /**
-     * @Route("/ajoutsystem", name="ajoutsystem", methods={"POST"})
+     * @Route("/api/ajoutsystem", name="ajoutsystem", methods={"POST"})
      */
     public function ajoutsystem(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager)
     {
@@ -67,7 +67,7 @@ class SystemWaryController extends AbstractController
      }
 
     /**                                                                     
-     * @Route("/ajoutpartenaire", name="ajoutpartenaire", methods={"POST"})
+     * @Route("/api/ajoutpartenaire", name="ajoutpartenaire", methods={"POST"})
      */
     public function ajoutpartenaire(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager)
     {
@@ -98,7 +98,7 @@ class SystemWaryController extends AbstractController
 
             $data = [
                 'status' => 201,
-                'message' => 'Le Partenaire a été créé'
+                'message' => 'Le Partenaire et son Admin ont été créés'
             ];
             return new JsonResponse($data, 201);
         }

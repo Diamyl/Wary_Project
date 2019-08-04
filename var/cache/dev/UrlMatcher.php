@@ -14,8 +14,9 @@ return [
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
         '/system/wary' => [[['_route' => 'system_wary', '_controller' => 'App\\Controller\\SystemWaryController::index'], null, null, null, false, false, null]],
-        '/ajoutsystem' => [[['_route' => 'ajoutsystem', '_controller' => 'App\\Controller\\SystemWaryController::ajoutsystem'], null, ['POST' => 0], null, false, false, null]],
-        '/ajoutpartenaire' => [[['_route' => 'ajoutpartenaire', '_controller' => 'App\\Controller\\SystemWaryController::ajoutpartenaire'], null, ['POST' => 0], null, false, false, null]],
+        '/api/ajoutsystem' => [[['_route' => 'ajoutsystem', '_controller' => 'App\\Controller\\SystemWaryController::ajoutsystem'], null, ['POST' => 0], null, false, false, null]],
+        '/api/ajoutpartenaire' => [[['_route' => 'ajoutpartenaire', '_controller' => 'App\\Controller\\SystemWaryController::ajoutpartenaire'], null, ['POST' => 0], null, false, false, null]],
+        '/api/login_check' => [[['_route' => 'api_login_check'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
