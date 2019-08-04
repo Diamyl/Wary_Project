@@ -40,5 +40,6 @@ security:
     access_control:
       - { path: ^/ajoutsystem, roles: ROLE_SUPERADMIN }
       - { path: ^/ajoutpartenaire, roles: ROLE_SUPERADMIN }
+      - { path: ^/adduserpartenaire, roles: ROLE_ADMIN_PARTENAIRE }
       # - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
       # - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }

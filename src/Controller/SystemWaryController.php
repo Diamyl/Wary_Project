@@ -61,7 +61,7 @@ class SystemWaryController extends AbstractController
 
             $data = [
             'status' => 500,
-            'message' => 'Vous devez renseigner les clés username et password',
+            'message' => 'Vous devez renseigner Tous les champs',
              ];
              return new JsonResponse($data, 500);
      }
@@ -105,7 +105,46 @@ class SystemWaryController extends AbstractController
 
             $data = [
             'status' => 500,
-            'message' => 'Vous devez renseigner tout les champs',
+            'message' => 'Vous devez renseigner tous les champs',
+             ];
+             return new JsonResponse($data, 500);
+     }
+     
+       /**
+     * @Route("/api/adduserpartenaire", name="adduserpartenaire", methods={"POST"})
+     */
+    public function adduserpartenaire(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager)
+    {
+        $values = json_decode($request->getContent());
+        if(isset($values->Email,$values->Password)) {
+            //$partenaire = new Partenaire();
+            $user = new User();
+            $user->setEmail($values->Email);
+            $user->setPrenom($values->Prenom);
+            $user->setNom($values->Nom);
+            $user->setCNI($values->CNI);
+            $user->setTel($values->Tel);
+            $user->setPassword($passwordEncoder->encodePassword($user, $values->Password));
+            $partenaire=$this->getDoctrine()->getRepository(Partenaire::class)->find($values->Partenaire);
+            $user->setPartenaire($partenaire);
+            $user->setRoles(['ROLE_USER_PARTENAIRE']);
+
+            
+            $data = [
+                'status' => 201,
+                'message' => 'Le User Admin a été créé',
+            ];
+        
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return new JsonResponse($data, 201);
+        }
+
+            $data = [
+            'status' => 500,
+            'message' => 'Vous devez renseigner Tous les champs',
              ];
              return new JsonResponse($data, 500);
      }
