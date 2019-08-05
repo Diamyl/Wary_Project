@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Compte;
 use App\Entity\Partenaire;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -70,7 +71,7 @@ class SystemWaryController extends AbstractController
      * @Route("/api/ajoutpartenaire", name="ajoutpartenaire", methods={"POST"})
      */
     public function ajoutpartenaire(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager)
-    {
+    {   
         $values = json_decode($request->getContent());
         if(isset($values->Email,$values->Raison_Sociale,$values->NINEA,$values->Tel,$values->Adresse)) {
             $partenaire = new Partenaire();
@@ -79,6 +80,7 @@ class SystemWaryController extends AbstractController
             $partenaire->setNINEA($values->NINEA);
             $partenaire->setTel($values->Tel);
             $partenaire->setAdresse($values->Adresse);
+            $partenaire->setStatus($values->Status);
 
             $adminpartenaire = new User();
             $adminpartenaire->setEmail($values->Email);
@@ -88,17 +90,26 @@ class SystemWaryController extends AbstractController
             $adminpartenaire->setTel($values->Tel_Admin);
             $adminpartenaire->setPassword($passwordEncoder->encodePassword($adminpartenaire, $values->Password));
             $adminpartenaire->setRoles(['ROLE_ADMIN_PARTENAIRE']);
+
+            $ncompte = date('y') . date('m') . date('d') . date('H') . date('i') . date('s');
+            $compte = new Compte();
+            $compte->setNumero($ncompte);
+            $compte->setSolde(0);
+
             
-            // lier les deux tables
+            // lier les tables
             $adminpartenaire->setPartenaire($partenaire);
+            $compte->setPartenaire($partenaire);
+
 
             $entityManager->persist($partenaire);
             $entityManager->persist($adminpartenaire);
+            $entityManager->persist($compte);
             $entityManager->flush();
 
             $data = [
                 'status' => 201,
-                'message' => 'Le Partenaire et son Admin ont été créés'
+                'message' => 'Le Partenaire a été créé'
             ];
             return new JsonResponse($data, 201);
         }
@@ -117,7 +128,6 @@ class SystemWaryController extends AbstractController
     {
         $values = json_decode($request->getContent());
         if(isset($values->Email,$values->Password)) {
-            //$partenaire = new Partenaire();
             $user = new User();
             $user->setEmail($values->Email);
             $user->setPrenom($values->Prenom);
@@ -125,14 +135,15 @@ class SystemWaryController extends AbstractController
             $user->setCNI($values->CNI);
             $user->setTel($values->Tel);
             $user->setPassword($passwordEncoder->encodePassword($user, $values->Password));
-            $partenaire=$this->getDoctrine()->getRepository(Partenaire::class)->find($values->Partenaire);
+            $Idpartenaire=$this->getUser()->getPartenaire();
+            $partenaire=$this->getDoctrine()->getRepository(Partenaire::class)->find($Idpartenaire);
             $user->setPartenaire($partenaire);
             $user->setRoles(['ROLE_USER_PARTENAIRE']);
 
-            
+
             $data = [
                 'status' => 201,
-                'message' => 'Le User Admin a été créé',
+                'message' => 'Le User Partenaire a été créé',
             ];
         
             $entityManager = $this->getDoctrine()->getManager();

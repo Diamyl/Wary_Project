@@ -55,6 +55,11 @@ class Partenaire
      */
     private $comptes;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Status;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -184,6 +189,18 @@ class Partenaire
                 $compte->setPartenaire(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->Status;
+    }
+
+    public function setStatus(string $Status): self
+    {
+        $this->Status = $Status;
 
         return $this;
     }
