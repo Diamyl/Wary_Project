@@ -38,8 +38,9 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-      - { path: ^/ajoutsystem, roles: ROLE_SUPERADMIN }
-      - { path: ^/ajoutpartenaire, roles: ROLE_SUPERADMIN }
-      - { path: ^/adduserpartenaire, roles: ROLE_ADMIN_PARTENAIRE }
+      - { path: ^/api/ajoutsystem, roles: ROLE_SUPERADMIN }
+      - { path: ^/api/ajoutpartenaire, roles: ROLE_SUPERADMIN }
+      - { path: ^/api/adduserpartenaire, roles: ROLE_ADMIN_PARTENAIRE }
+      - { path: ^/api/adddepot, roles: ROLE_CAISSIER }
       # - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
       # - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }

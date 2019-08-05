@@ -3,16 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\Compte;
 use App\Entity\Depot;
+use App\Entity\Compte;
 use App\Entity\Partenaire;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SystemWaryController extends AbstractController
 {
@@ -165,40 +166,45 @@ class SystemWaryController extends AbstractController
       /**
      * @Route("/api/adddepot", name="adddepot", methods={"POST"})
      */
-    public function adddepot(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager)
+    public function adddepot(Request $request, EntityManagerInterface $entityManager)
     {
         $values = json_decode($request->getContent());
         
-        if(isset($values->Montant,$values->Idcompte)) {
-            $depot = new Depot();
-            $depot->setMontant($values->Montant);
-            $depot->setDateDepot(new \DateTime());
-            $compte=$this->getDoctrine()->getRepository(Compte::class)->find($values->Idcompte);
-            $depot->setCompte($compte);
+        if(isset($values->Montant,$values->Idcompte)){
+            if($values->Montant >= 75000){
+                $depot = new Depot();
+                $depot->setMontant($values->Montant);
+                $depot->setDateDepot(new \DateTime());
+                $compte=$this->getDoctrine()->getRepository(Compte::class)->find($values->Idcompte);
+                $depot->setCompte($compte);
+                $solde=$compte->getSolde();
+                $compte->setSolde($solde+ $values->Montant);
 
 
-            // $Idcompte=$this->getDepot()->getCompte();
-            // $partenaire=$this->getDoctrine()->getRepository(Compte::class)->find($Idcompte);
-            // $depot->setCompte($compte);
-            // $user->setRoles(['ROLE_USER_PARTENAIRE']);
+                $data = [
+                    'status' => 201,
+                    'message' => 'Le dépôt a été créé effectué',
+                ];
+                
+                $entityManager->persist($depot);
+                $entityManager->flush();
 
+                return new JsonResponse($data, 201);
+            }
 
-            $data = [
-                'status' => 201,
-                'message' => 'Le dépôt a été créé effectué',
-            ];
-        
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($depot);
-            $entityManager->flush();
-
-            return new JsonResponse($data, 201);
+            else{
+                $data = [
+                    'status' => 500,
+                    'message' => 'Le montant doit être supérieur ou égal à 75000',
+                ];
+                return new JsonResponse($data, 500);
+            }
         }
 
             $data = [
-            'status' => 500,
-            'message' => 'Vous devez renseigner tous les champs',
-             ];
-             return new JsonResponse($data, 500);
-     }
+                'status' => 501,
+                'message' => 'Tous les champs doivent être remplis',
+            ];
+            return new JsonResponse($data, 501);
+    }
 }
