@@ -17,6 +17,7 @@ return [
         '/api/ajoutsystem' => [[['_route' => 'ajoutsystem', '_controller' => 'App\\Controller\\SystemWaryController::ajoutsystem'], null, ['POST' => 0], null, false, false, null]],
         '/api/ajoutpartenaire' => [[['_route' => 'ajoutpartenaire', '_controller' => 'App\\Controller\\SystemWaryController::ajoutpartenaire'], null, ['POST' => 0], null, false, false, null]],
         '/api/adduserpartenaire' => [[['_route' => 'adduserpartenaire', '_controller' => 'App\\Controller\\SystemWaryController::adduserpartenaire'], null, ['POST' => 0], null, false, false, null]],
+        '/api/adddepot' => [[['_route' => 'adddepot', '_controller' => 'App\\Controller\\SystemWaryController::adddepot'], null, ['POST' => 0], null, false, false, null]],
         '/api/login_check' => [[['_route' => 'api_login_check'], null, null, null, false, false, null]],
     ],
     [ // $regexpList

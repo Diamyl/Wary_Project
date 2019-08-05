@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Compte;
+use App\Entity\Depot;
 use App\Entity\Partenaire;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,6 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class SystemWaryController extends AbstractController
 {
@@ -127,7 +129,7 @@ class SystemWaryController extends AbstractController
     public function adduserpartenaire(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager)
     {
         $values = json_decode($request->getContent());
-        if(isset($values->Email,$values->Password)) {
+        if(isset($values->Email,$values->Password, $values->Prenom, $values->Nom, $values->CNI, $values->Tel)) {
             $user = new User();
             $user->setEmail($values->Email);
             $user->setPrenom($values->Prenom);
@@ -156,6 +158,46 @@ class SystemWaryController extends AbstractController
             $data = [
             'status' => 500,
             'message' => 'Vous devez renseigner Tous les champs',
+             ];
+             return new JsonResponse($data, 500);
+     }
+
+      /**
+     * @Route("/api/adddepot", name="adddepot", methods={"POST"})
+     */
+    public function adddepot(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager)
+    {
+        $values = json_decode($request->getContent());
+        
+        if(isset($values->Montant,$values->Idcompte)) {
+            $depot = new Depot();
+            $depot->setMontant($values->Montant);
+            $depot->setDateDepot(new \DateTime());
+            $compte=$this->getDoctrine()->getRepository(Compte::class)->find($values->Idcompte);
+            $depot->setCompte($compte);
+
+
+            // $Idcompte=$this->getDepot()->getCompte();
+            // $partenaire=$this->getDoctrine()->getRepository(Compte::class)->find($Idcompte);
+            // $depot->setCompte($compte);
+            // $user->setRoles(['ROLE_USER_PARTENAIRE']);
+
+
+            $data = [
+                'status' => 201,
+                'message' => 'Le dépôt a été créé effectué',
+            ];
+        
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($depot);
+            $entityManager->flush();
+
+            return new JsonResponse($data, 201);
+        }
+
+            $data = [
+            'status' => 500,
+            'message' => 'Vous devez renseigner tous les champs',
              ];
              return new JsonResponse($data, 500);
      }
