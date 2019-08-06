@@ -12,6 +12,7 @@ class ComposerStaticInit4fa80cc86fe35461a8a47853650d685e
         '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
+        '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -27,6 +28,10 @@ class ComposerStaticInit4fa80cc86fe35461a8a47853650d685e
         'W' => 
         array (
             'Webmozart\\Assert\\' => 17,
+        ),
+        'V' => 
+        array (
+            'Vich\\UploaderBundle\\' => 20,
         ),
         'T' => 
         array (
@@ -48,6 +53,7 @@ class ComposerStaticInit4fa80cc86fe35461a8a47853650d685e
             'Symfony\\Component\\VarExporter\\' => 30,
             'Symfony\\Component\\VarDumper\\' => 28,
             'Symfony\\Component\\Validator\\' => 28,
+            'Symfony\\Component\\Templating\\' => 29,
             'Symfony\\Component\\Stopwatch\\' => 28,
             'Symfony\\Component\\Serializer\\' => 29,
             'Symfony\\Component\\Security\\Http\\' => 32,
@@ -58,10 +64,13 @@ class ComposerStaticInit4fa80cc86fe35461a8a47853650d685e
             'Symfony\\Component\\PropertyInfo\\' => 31,
             'Symfony\\Component\\PropertyAccess\\' => 33,
             'Symfony\\Component\\Process\\' => 26,
+            'Symfony\\Component\\OptionsResolver\\' => 34,
             'Symfony\\Component\\Mime\\' => 23,
+            'Symfony\\Component\\Intl\\' => 23,
             'Symfony\\Component\\Inflector\\' => 28,
             'Symfony\\Component\\HttpKernel\\' => 29,
             'Symfony\\Component\\HttpFoundation\\' => 33,
+            'Symfony\\Component\\Form\\' => 23,
             'Symfony\\Component\\Finder\\' => 25,
             'Symfony\\Component\\Filesystem\\' => 29,
             'Symfony\\Component\\ExpressionLanguage\\' => 37,
@@ -97,6 +106,10 @@ class ComposerStaticInit4fa80cc86fe35461a8a47853650d685e
             'Negotiation\\' => 12,
             'Namshi\\JOSE\\' => 12,
         ),
+        'M' => 
+        array (
+            'Metadata\\' => 9,
+        ),
         'L' => 
         array (
             'Lexik\\Bundle\\JWTAuthenticationBundle\\' => 37,
@@ -114,11 +127,13 @@ class ComposerStaticInit4fa80cc86fe35461a8a47853650d685e
             'Doctrine\\DBAL\\' => 14,
             'Doctrine\\Common\\Lexer\\' => 22,
             'Doctrine\\Common\\Inflector\\' => 26,
+            'Doctrine\\Common\\DataFixtures\\' => 29,
             'Doctrine\\Common\\Collections\\' => 28,
             'Doctrine\\Common\\Cache\\' => 22,
             'Doctrine\\Common\\Annotations\\' => 28,
             'Doctrine\\Common\\' => 16,
             'Doctrine\\Bundle\\MigrationsBundle\\' => 33,
+            'Doctrine\\Bundle\\FixturesBundle\\' => 31,
             'Doctrine\\Bundle\\DoctrineCacheBundle\\' => 36,
             'Doctrine\\Bundle\\DoctrineBundle\\' => 31,
         ),
@@ -148,6 +163,10 @@ class ComposerStaticInit4fa80cc86fe35461a8a47853650d685e
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'Vich\\UploaderBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vich/uploader-bundle',
         ),
         'Twig\\' => 
         array (
@@ -209,6 +228,10 @@ class ComposerStaticInit4fa80cc86fe35461a8a47853650d685e
         array (
             0 => __DIR__ . '/..' . '/symfony/validator',
         ),
+        'Symfony\\Component\\Templating\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/templating',
+        ),
         'Symfony\\Component\\Stopwatch\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/stopwatch',
@@ -249,9 +272,17 @@ class ComposerStaticInit4fa80cc86fe35461a8a47853650d685e
         array (
             0 => __DIR__ . '/..' . '/symfony/process',
         ),
+        'Symfony\\Component\\OptionsResolver\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/options-resolver',
+        ),
         'Symfony\\Component\\Mime\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/mime',
+        ),
+        'Symfony\\Component\\Intl\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/intl',
         ),
         'Symfony\\Component\\Inflector\\' => 
         array (
@@ -264,6 +295,10 @@ class ComposerStaticInit4fa80cc86fe35461a8a47853650d685e
         'Symfony\\Component\\HttpFoundation\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/http-foundation',
+        ),
+        'Symfony\\Component\\Form\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/form',
         ),
         'Symfony\\Component\\Finder\\' => 
         array (
@@ -377,6 +412,10 @@ class ComposerStaticInit4fa80cc86fe35461a8a47853650d685e
         array (
             0 => __DIR__ . '/..' . '/namshi/jose/src/Namshi/JOSE',
         ),
+        'Metadata\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jms/metadata/src',
+        ),
         'Lexik\\Bundle\\JWTAuthenticationBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/lexik/jwt-authentication-bundle',
@@ -413,6 +452,10 @@ class ComposerStaticInit4fa80cc86fe35461a8a47853650d685e
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
         ),
+        'Doctrine\\Common\\DataFixtures\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/data-fixtures/lib/Doctrine/Common/DataFixtures',
+        ),
         'Doctrine\\Common\\Collections\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/collections/lib/Doctrine/Common/Collections',
@@ -435,6 +478,10 @@ class ComposerStaticInit4fa80cc86fe35461a8a47853650d685e
         'Doctrine\\Bundle\\MigrationsBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/doctrine-migrations-bundle',
+        ),
+        'Doctrine\\Bundle\\FixturesBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/doctrine-fixtures-bundle',
         ),
         'Doctrine\\Bundle\\DoctrineCacheBundle\\' => 
         array (
@@ -473,10 +520,21 @@ class ComposerStaticInit4fa80cc86fe35461a8a47853650d685e
                 0 => __DIR__ . '/..' . '/ocramius/proxy-manager/src',
             ),
         ),
+        'B' => 
+        array (
+            'Behat\\Transliterator' => 
+            array (
+                0 => __DIR__ . '/..' . '/behat/transliterator/src',
+            ),
+        ),
     );
 
     public static $classMap = array (
+        'Collator' => __DIR__ . '/..' . '/symfony/intl/Resources/stubs/Collator.php',
+        'IntlDateFormatter' => __DIR__ . '/..' . '/symfony/intl/Resources/stubs/IntlDateFormatter.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
+        'Locale' => __DIR__ . '/..' . '/symfony/intl/Resources/stubs/Locale.php',
+        'NumberFormatter' => __DIR__ . '/..' . '/symfony/intl/Resources/stubs/NumberFormatter.php',
         'SqlFormatter' => __DIR__ . '/..' . '/jdorn/sql-formatter/lib/SqlFormatter.php',
     );
 

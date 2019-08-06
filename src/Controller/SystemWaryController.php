@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\UserSystem;
 use App\Entity\Depot;
 use App\Entity\Compte;
 use App\Entity\Partenaire;
@@ -27,13 +28,13 @@ class SystemWaryController extends AbstractController
         ]);
     }
        /**
-     * @Route("/api/ajoutsystem", name="ajoutsystem", methods={"POST"})
+     * @Route("/ajoutusersystem", name="ajoutusersystem", methods={"POST"})
      */
-    public function ajoutsystem(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager)
+    public function ajoutusersystem(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager)
     {
         $values = json_decode($request->getContent());
         if(isset($values->Email,$values->Password)) {
-            $user = new User();
+            $user = new UserSystem();
             $user->setEmail($values->Email);
             $user->setPrenom($values->Prenom);
             $user->setNom($values->Nom);
@@ -53,6 +54,14 @@ class SystemWaryController extends AbstractController
                 'status' => 201,
                 'message' => 'Le Caissier a été créé',
             ];
+            }
+
+            elseif ($values->Role==3) {
+            $user->setRoles(['ROLE_ADMIN']);
+            $data = [
+                'status' => 201,
+                'message' => 'Admin créé',
+            ];
            }
 
             $entityManager->persist($user);
@@ -71,7 +80,7 @@ class SystemWaryController extends AbstractController
      }
 
     /**                                                                     
-     * @Route("/api/ajoutpartenaire", name="ajoutpartenaire", methods={"POST"})
+     * @Route("/ajoutpartenaire", name="ajoutpartenaire", methods={"POST"})
      */
     public function ajoutpartenaire(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager)
     {   
@@ -125,7 +134,7 @@ class SystemWaryController extends AbstractController
      }
      
        /**
-     * @Route("/api/adduserpartenaire", name="adduserpartenaire", methods={"POST"})
+     * @Route("/adduserpartenaire", name="adduserpartenaire", methods={"POST"})
      */
     public function adduserpartenaire(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager)
     {
@@ -164,12 +173,11 @@ class SystemWaryController extends AbstractController
      }
 
       /**
-     * @Route("/api/adddepot", name="adddepot", methods={"POST"})
+     * @Route("/adddepot", name="adddepot", methods={"POST"})
      */
     public function adddepot(Request $request, EntityManagerInterface $entityManager)
     {
         $values = json_decode($request->getContent());
-        
         if(isset($values->Montant,$values->Idcompte)){
             if($values->Montant >= 75000){
                 $depot = new Depot();

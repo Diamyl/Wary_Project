@@ -16,9 +16,11 @@
         "symfony/profiler-pack": "^1.0",
         "symfony/security-bundle": "4.3.*",
         "symfony/web-server-bundle": "4.3.*",
-        "symfony/yaml": "4.3.*"
+        "symfony/yaml": "4.3.*",
+        "vich/uploader-bundle": "^1.10"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.2"
     },
     "config": {
         "preferred-install": {
